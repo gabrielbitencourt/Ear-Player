@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nuJ-lc-sqg">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="TeluguSangamMN.ttc">
+            <string>TeluguSangamMN</string>
+            <string>TeluguSangamMN</string>
+            <string>TeluguSangamMN</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="FWu-lK-VcP">
+            <objects>
+                <viewController id="nuJ-lc-sqg" customClass="ViewController" customModule="Ear_Player" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vLl-0H-m6k"/>
+                        <viewControllerLayoutGuide type="bottom" id="grp-bL-d3P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3r6-Lo-7Sr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RD-ib-I2j">
+                                <rect key="frame" x="264" y="213" width="72" height="60"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="KGb-6e-khT"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playAudio:" destination="nuJ-lc-sqg" eventType="touchUpInside" id="nWR-Vd-oAf"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Zg-dR-gbt">
+                                <rect key="frame" x="20" y="277" width="580" height="279"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4ig-EW-OkR">
+                                    <size key="itemSize" width="111" height="141"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="FbW-2j-dfn" customClass="CellController" customModule="Ear_Player" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="69" width="111" height="141"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="111" height="141"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDQ-16-oEt">
+                                                    <rect key="frame" x="0.0" y="120" width="100" height="21"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="cri-VK-rXX"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="TeluguSangamMN" family="Telugu Sangam MN" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H4U-GE-fYA">
+                                                    <rect key="frame" x="0.0" y="16" width="100" height="100"/>
+                                                    <animations/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg4-lG-UVj">
+                                                    <rect key="frame" x="87" y="5" width="24" height="25"/>
+                                                    <animations/>
+                                                    <state key="normal" image="exitButton"/>
+                                                </button>
+                                            </subviews>
+                                            <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <animations/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="tg4-lG-UVj" firstAttribute="leading" secondItem="FbW-2j-dfn" secondAttribute="leadingMargin" constant="79" id="Rmd-xe-uXa"/>
+                                            <constraint firstItem="H4U-GE-fYA" firstAttribute="trailing" secondItem="MDQ-16-oEt" secondAttribute="trailing" id="S14-eh-0vM"/>
+                                            <constraint firstItem="H4U-GE-fYA" firstAttribute="top" secondItem="FbW-2j-dfn" secondAttribute="topMargin" constant="8" id="U2m-ai-Oen"/>
+                                            <constraint firstAttribute="trailing" secondItem="tg4-lG-UVj" secondAttribute="trailing" id="UsH-gh-B1g"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="H4U-GE-fYA" secondAttribute="trailing" constant="3" id="ZeK-f7-XeH"/>
+                                            <constraint firstItem="H4U-GE-fYA" firstAttribute="leading" secondItem="MDQ-16-oEt" secondAttribute="leading" id="cAl-Z4-uAc"/>
+                                            <constraint firstItem="tg4-lG-UVj" firstAttribute="top" secondItem="FbW-2j-dfn" secondAttribute="topMargin" constant="-3" id="dQv-Og-Qqp"/>
+                                            <constraint firstItem="MDQ-16-oEt" firstAttribute="top" secondItem="tg4-lG-UVj" secondAttribute="bottom" constant="90" id="mhd-FX-cTt"/>
+                                            <constraint firstItem="MDQ-16-oEt" firstAttribute="leading" secondItem="FbW-2j-dfn" secondAttribute="leading" id="mxG-13-rGY"/>
+                                            <constraint firstItem="MDQ-16-oEt" firstAttribute="top" secondItem="H4U-GE-fYA" secondAttribute="bottom" constant="4" id="wIn-Y2-PIJ"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="MDQ-16-oEt" secondAttribute="bottom" constant="-8" id="yhM-xz-Htl"/>
+                                        </constraints>
+                                        <size key="customSize" width="111" height="141"/>
+                                        <connections>
+                                            <outlet property="exitButton" destination="tg4-lG-UVj" id="SsK-Fw-lZQ"/>
+                                            <outlet property="imageView" destination="H4U-GE-fYA" id="Led-81-Uw7"/>
+                                            <outlet property="label" destination="MDQ-16-oEt" id="px2-a4-b7I"/>
+                                            <outletCollection property="gestureRecognizers" destination="lZG-rV-DLY" appends="YES" id="CmT-rJ-gnB"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="nuJ-lc-sqg" id="Kvy-sF-730"/>
+                                    <outlet property="delegate" destination="nuJ-lc-sqg" id="dha-jy-qtb"/>
+                                </connections>
+                            </collectionView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="FiC-kE-Ej9">
+                                <rect key="frame" x="245" y="78" width="110" height="110"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="nNL-Jz-rgS"/>
+                                    <constraint firstAttribute="width" constant="110" id="rXi-rm-L23"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seguintes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="og5-76-F21">
+                                <rect key="frame" x="20" y="275" width="82" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="0Jc-hC-aUa"/>
+                                    <constraint firstAttribute="height" constant="21" id="3CK-uf-Uki"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TeluguSangamMN" family="Telugu Sangam MN" pointSize="17"/>
+                                <color key="textColor" red="0.74325284089999999" green="0.74325284089999999" blue="0.74325284089999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ooY-xp-gTa">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <animations/>
+                                <items>
+                                    <barButtonItem systemItem="add" id="U9w-IQ-eLS">
+                                        <connections>
+                                            <action selector="addMusic:" destination="nuJ-lc-sqg" id="jKV-X2-dBY"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="JyI-2q-dNy"/>
+                                    <barButtonItem title="?" style="done" id="PtC-4m-8xE"/>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Choose a music" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6Q-j4-08j">
+                                <rect key="frame" x="0.0" y="195" width="600" height="23"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="TeluguSangamMN" family="Telugu Sangam MN" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rjZ-4v-mIe">
+                                <rect key="frame" x="140" y="20" width="320" height="50"/>
+                                <animations/>
+                                <connections>
+                                    <outlet property="delegate" destination="nuJ-lc-sqg" id="RvZ-0R-eUO"/>
+                                </connections>
+                            </adBannerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ul-Xj-sE2">
+                                <rect key="frame" x="20" y="228" width="60" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="78v-YG-pYW"/>
+                                </constraints>
+                                <state key="normal" title="Previous"/>
+                                <connections>
+                                    <action selector="getback:" destination="nuJ-lc-sqg" eventType="touchUpInside" id="6F9-rq-Dsh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOe-Cl-i6o">
+                                <rect key="frame" x="548" y="228" width="32" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="advance:" destination="nuJ-lc-sqg" eventType="touchUpInside" id="bfB-Pu-lEA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="4Zg-dR-gbt" firstAttribute="trailing" secondItem="ooY-xp-gTa" secondAttribute="trailing" id="2Uh-hq-6jx"/>
+                            <constraint firstItem="9Ul-Xj-sE2" firstAttribute="top" secondItem="LOe-Cl-i6o" secondAttribute="top" id="5Iz-6m-1Y6"/>
+                            <constraint firstItem="LOe-Cl-i6o" firstAttribute="trailing" secondItem="3r6-Lo-7Sr" secondAttribute="trailingMargin" id="5Or-w0-bgF"/>
+                            <constraint firstItem="l6Q-j4-08j" firstAttribute="top" secondItem="FiC-kE-Ej9" secondAttribute="bottom" constant="7" id="8f1-7d-SCZ"/>
+                            <constraint firstItem="FiC-kE-Ej9" firstAttribute="centerX" secondItem="rjZ-4v-mIe" secondAttribute="centerX" id="CHG-KE-Jkw"/>
+                            <constraint firstItem="9Ul-Xj-sE2" firstAttribute="leading" secondItem="og5-76-F21" secondAttribute="leading" id="MbU-Wa-w9w"/>
+                            <constraint firstItem="og5-76-F21" firstAttribute="top" secondItem="9Ul-Xj-sE2" secondAttribute="bottom" constant="17" id="PIm-rt-HlY"/>
+                            <constraint firstItem="l6Q-j4-08j" firstAttribute="leading" secondItem="ooY-xp-gTa" secondAttribute="leading" id="S9a-Lf-9fR"/>
+                            <constraint firstItem="FiC-kE-Ej9" firstAttribute="centerX" secondItem="l6Q-j4-08j" secondAttribute="centerX" id="TTe-q6-FJ0"/>
+                            <constraint firstItem="9Ul-Xj-sE2" firstAttribute="centerY" secondItem="1RD-ib-I2j" secondAttribute="centerY" id="YjK-Vl-nDL"/>
+                            <constraint firstItem="4Zg-dR-gbt" firstAttribute="top" secondItem="LOe-Cl-i6o" secondAttribute="bottom" constant="19" id="c98-51-Y7x"/>
+                            <constraint firstItem="og5-76-F21" firstAttribute="top" secondItem="l6Q-j4-08j" secondAttribute="bottom" constant="57" id="dpj-qF-6ej"/>
+                            <constraint firstItem="FiC-kE-Ej9" firstAttribute="top" secondItem="vLl-0H-m6k" secondAttribute="bottom" constant="58" id="er0-Ra-LPt"/>
+                            <constraint firstItem="1RD-ib-I2j" firstAttribute="top" secondItem="FiC-kE-Ej9" secondAttribute="bottom" constant="25" id="f3F-q8-nNx"/>
+                            <constraint firstItem="9Ul-Xj-sE2" firstAttribute="baseline" secondItem="LOe-Cl-i6o" secondAttribute="firstBaseline" id="fzu-ge-jHc"/>
+                            <constraint firstItem="l6Q-j4-08j" firstAttribute="leading" secondItem="3r6-Lo-7Sr" secondAttribute="leading" id="gBT-bC-Hrh"/>
+                            <constraint firstAttribute="trailing" secondItem="l6Q-j4-08j" secondAttribute="trailing" id="hsz-n1-JZb"/>
+                            <constraint firstItem="l6Q-j4-08j" firstAttribute="centerX" secondItem="1RD-ib-I2j" secondAttribute="centerX" id="iUf-Uo-esI"/>
+                            <constraint firstItem="4Zg-dR-gbt" firstAttribute="leading" secondItem="3r6-Lo-7Sr" secondAttribute="leadingMargin" id="o3Z-xh-dbV"/>
+                            <constraint firstItem="og5-76-F21" firstAttribute="leading" secondItem="4Zg-dR-gbt" secondAttribute="leading" id="oEK-7v-fpM"/>
+                            <constraint firstItem="LOe-Cl-i6o" firstAttribute="baseline" secondItem="9Ul-Xj-sE2" secondAttribute="firstBaseline" id="ooO-4A-qXY"/>
+                            <constraint firstItem="4Zg-dR-gbt" firstAttribute="trailing" secondItem="l6Q-j4-08j" secondAttribute="trailing" id="qgh-ep-UC0"/>
+                            <constraint firstItem="ooY-xp-gTa" firstAttribute="top" secondItem="4Zg-dR-gbt" secondAttribute="bottom" id="rJL-vf-rOB"/>
+                            <constraint firstItem="rjZ-4v-mIe" firstAttribute="top" secondItem="vLl-0H-m6k" secondAttribute="bottom" id="t6U-uJ-3cu"/>
+                            <constraint firstItem="ooY-xp-gTa" firstAttribute="bottom" secondItem="grp-bL-d3P" secondAttribute="top" id="tyc-Qp-dFJ"/>
+                            <constraint firstItem="4Zg-dR-gbt" firstAttribute="top" secondItem="1RD-ib-I2j" secondAttribute="bottom" constant="4" id="zPB-TX-2eD"/>
+                            <constraint firstItem="9Ul-Xj-sE2" firstAttribute="top" secondItem="l6Q-j4-08j" secondAttribute="bottom" constant="10" id="zsM-Gl-8TC"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="lkl-a6-qWN" appends="YES" id="Jsb-O0-xtF"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="adBanner" destination="rjZ-4v-mIe" id="dv4-YJ-Cj8"/>
+                        <outlet property="collection" destination="4Zg-dR-gbt" id="SKu-3z-0Tq"/>
+                        <outlet property="longTouch" destination="lZG-rV-DLY" id="sen-hN-JJg"/>
+                        <outlet property="musicArtwork" destination="FiC-kE-Ej9" id="OVN-2F-CZd"/>
+                        <outlet property="musicName" destination="l6Q-j4-08j" id="b3c-Ca-OWj"/>
+                        <outlet property="playButton" destination="1RD-ib-I2j" id="bro-eM-suz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q9y-iX-GcA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="lZG-rV-DLY">
+                    <connections>
+                        <action selector="touched:" destination="nuJ-lc-sqg" id="lfM-ht-ZAl"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="lkl-a6-qWN">
+                    <connections>
+                        <action selector="tapped:" destination="nuJ-lc-sqg" id="g6Y-Te-E3H"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1418" y="443"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="exitButton" width="374" height="372"/>
+        <image name="noArtwork" width="600" height="600"/>
+        <image name="play" width="256" height="256"/>
+    </resources>
+</document>
