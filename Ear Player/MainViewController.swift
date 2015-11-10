@@ -357,4 +357,8 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
         collection.reloadData()
         touching = true
     }
+    
+    @IBAction func exit(sender: UIStoryboardSegue){
+    
+    }
 }
