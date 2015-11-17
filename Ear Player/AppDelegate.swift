@@ -24,35 +24,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    /*func grabStoryboard() -> UIStoryboard {
+    //Force-Touch
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
         
-        //let screenHeight: Int = Int(UIScreen.mainScreen().bounds.size.height)
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-
-        /*
-        switch screenHeight{
-        case 480:
-            storyBoard = UIStoryboard(name: "Main-4s", bundle: nil)
-            
-        case 568:
-            storyBoard = UIStoryboard(name: "Main-5s", bundle: nil)
-            
-        case 667:
-            storyBoard = UIStoryboard(name: "Main-6", bundle: nil)
-            
-        case 736:
-            storyBoard = UIStoryboard(name: "Main-6+", bundle: nil)
-            
-        default:
-            storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            
-        }
-        */
+        completionHandler(handleQuickAction(shortcutItem))
         
-        return storyBoard
     }
-    */
 
+    @available(iOS 9.0, *)
+    func handleQuickAction(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        
+        var quickActionHandled = false
+        
+        if shortcutItem.localizedTitle == "New Queue"{
+
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateInitialViewController()! as! ViewController
+            
+            self.window?.rootViewController?.presentViewController(viewController, animated: true, completion: nil)
+            viewController.addMusic(UIButton)
+
+            print("handled quick action")
+            
+            quickActionHandled = true
+        }
+        
+        if shortcutItem.localizedTitle == "Playlist: Favoritas"{
+            
+            //will be implemented after playlists
+            
+            quickActionHandled = true
+        }
+        
+        
+        
+        return quickActionHandled
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

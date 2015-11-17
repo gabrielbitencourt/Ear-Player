@@ -49,8 +49,8 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     //Protocols
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        print("did load")
+
         //iOS 9
         let session = AVAudioSession.sharedInstance()
         do{
@@ -75,11 +75,24 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
 
         musicArtwork.layer.cornerRadius = 10.0
         musicArtwork.clipsToBounds = true
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("will appear")
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("did appear")
     }
     
     //iAd
@@ -358,6 +371,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
         touching = true
     }
     
+    //Segues
     @IBAction func exit(sender: UIStoryboardSegue){
     
     }
