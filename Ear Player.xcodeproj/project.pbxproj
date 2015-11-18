@@ -11,6 +11,8 @@
 		962CB1501B27BF9A00ECF55F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 962CB14F1B27BF9A00ECF55F /* Assets.xcassets */; };
 		962CB15E1B27BF9B00ECF55F /* Ear_PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CB15D1B27BF9B00ECF55F /* Ear_PlayerTests.swift */; };
 		962CB1691B27BF9B00ECF55F /* Ear_PlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CB1681B27BF9B00ECF55F /* Ear_PlayerUITests.swift */; };
+		964753781BFCF751000D4420 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 964753771BFCF751000D4420 /* CoreData.framework */; };
+		964753B81BFCF7ED000D4420 /* Playlists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 964753B61BFCF7ED000D4420 /* Playlists.xcdatamodeld */; };
 		9667DDAE1B2C7AFE005B3DA8 /* CellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */; };
 		9667DDB01B2C7D1D005B3DA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */; };
 		9678655C1BF25ECF0043BA37 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678655B1BF25ECF0043BA37 /* PlaylistController.swift */; };
@@ -47,6 +49,8 @@
 		962CB1641B27BF9B00ECF55F /* Ear PlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ear PlayerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		962CB1681B27BF9B00ECF55F /* Ear_PlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ear_PlayerUITests.swift; sourceTree = "<group>"; };
 		962CB16A1B27BF9B00ECF55F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		964753771BFCF751000D4420 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		964753B71BFCF7ED000D4420 /* Playlists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Playlists.xcdatamodel; sourceTree = "<group>"; };
 		9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellController.swift; sourceTree = "<group>"; };
 		9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9678655B1BF25ECF0043BA37 /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				964753781BFCF751000D4420 /* CoreData.framework in Frameworks */,
 				967F43701B30B13B00172475 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +89,7 @@
 		962CB13C1B27BF9A00ECF55F = {
 			isa = PBXGroup;
 			children = (
+				964753771BFCF751000D4420 /* CoreData.framework */,
 				967F436F1B30B13B00172475 /* iAd.framework */,
 				962CB1471B27BF9A00ECF55F /* Ear Player */,
 				962CB15C1B27BF9B00ECF55F /* Ear PlayerTests */,
@@ -113,6 +119,7 @@
 				96C2FE6D1B48AE92000088B8 /* LaunchScreen.xib */,
 				962CB14F1B27BF9A00ECF55F /* Assets.xcassets */,
 				962CB1541B27BF9B00ECF55F /* Info.plist */,
+				964753B61BFCF7ED000D4420 /* Playlists.xcdatamodeld */,
 			);
 			path = "Ear Player";
 			sourceTree = "<group>";
@@ -269,6 +276,7 @@
 				9667DDB01B2C7D1D005B3DA8 /* MainViewController.swift in Sources */,
 				9678655C1BF25ECF0043BA37 /* PlaylistController.swift in Sources */,
 				9667DDAE1B2C7AFE005B3DA8 /* CellController.swift in Sources */,
+				964753B81BFCF7ED000D4420 /* Playlists.xcdatamodeld in Sources */,
 				962CB1491B27BF9A00ECF55F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,11 +417,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Ear Player/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bitencourt.Ear-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -425,11 +432,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Ear Player/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bitencourt.Ear-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -525,6 +531,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		964753B61BFCF7ED000D4420 /* Playlists.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				964753B71BFCF7ED000D4420 /* Playlists.xcdatamodel */,
+			);
+			currentVersion = 964753B71BFCF7ED000D4420 /* Playlists.xcdatamodel */;
+			path = Playlists.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 962CB13D1B27BF9A00ECF55F /* Project object */;
 }

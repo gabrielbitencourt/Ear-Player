@@ -45,6 +45,8 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     var newMedias: [AVPlayerItem] = []
     var newPlayer: AVQueuePlayer!
     
+    var playlistItems: MPMediaItemCollection!
+    
     
     //Protocols
     override func viewDidLoad() {
@@ -107,17 +109,14 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     @IBAction func tutorial(sender: AnyObject) {
         
         
-        if #available(iOS 8.0, *) {
-            let tutorial = UIAlertController(title: "Help", message: "1. The musics will play in the order that you select;\n2. Adding more musics won't replace the ones in the queue;\n3. The music will pause if you remove the phone from the ear.", preferredStyle: UIAlertControllerStyle.Alert)
+        let tutorial = UIAlertController(title: "Help", message: "1. The musics will play in the order that you select;\n2. Adding more musics won't replace the ones in the queue;\n3. The music will pause if you remove the phone from the ear.", preferredStyle: UIAlertControllerStyle.Alert)
 
-            let ok = UIAlertAction(title: "Ok, got it!", style: UIAlertActionStyle.Cancel, handler: nil)
+        let ok = UIAlertAction(title: "Ok, got it!", style: UIAlertActionStyle.Cancel, handler: nil)
             tutorial.addAction(ok)
             
-            self.presentViewController(tutorial, animated: true, completion: nil)
+        self.presentViewController(tutorial, animated: true, completion: nil)
 
-        } else {
-            // Fallback on earlier versions
-        }
+
         
     }
     
@@ -345,11 +344,9 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     
     func deleteCell(sender: AnyObject){
         var item = Int()
-        if #available(iOS 8.0, *) {
-            item = sender.layer.valueForKey("index") as! Int + 1
-        } else {
-            // Fallback on earlier versions
-        }
+        
+        item = sender.layer.valueForKey("index") as! Int + 1
+
         
         audioPlayer.removeItem(mediaArray[item])
 
@@ -373,6 +370,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     
     //Segues
     @IBAction func exit(sender: UIStoryboardSegue){
-    
+        mediaPicker(MPMediaPickerController(), didPickMediaItems: playlistItems)
     }
 }
