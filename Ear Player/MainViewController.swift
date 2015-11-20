@@ -216,13 +216,13 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
         counter++
         
         if counter % 2 == 0{
-            playButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
+            playButton.setTitle("||", forState: .Normal)
             UIDevice.currentDevice().proximityMonitoringEnabled = true
 
             updateMetadata()
         }
         else if counter % 2 == 1 {
-            playButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
+            playButton.setTitle(">", forState: .Normal)
             UIDevice.currentDevice().proximityMonitoringEnabled = false
 
             updateMetadata()
@@ -370,6 +370,9 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     
     //Segues
     @IBAction func exit(sender: UIStoryboardSegue){
-        mediaPicker(MPMediaPickerController(), didPickMediaItems: playlistItems)
+        
+        if sender.identifier == "fromCell"{
+            mediaPicker(MPMediaPickerController(), didPickMediaItems: playlistItems)
+        }
     }
 }
