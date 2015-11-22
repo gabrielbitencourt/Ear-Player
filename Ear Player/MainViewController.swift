@@ -27,8 +27,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     var touching: Bool = true
     var firstTime: Bool!
     var addLaterArray: [AVPlayerItem] = []
-
-
     
     //Audio variables
     var mediaPicker = MPMediaPickerController(mediaTypes: MPMediaType.AnyAudio)
@@ -42,16 +40,18 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     var artworkImageArray: [UIImage] = []
     var toBeSkipped: [Int] = []
     
+    //Add second time
     var newMedias: [AVPlayerItem] = []
     var newPlayer: AVQueuePlayer!
     
+    //Core Data for Playlists
     var playlistItems: MPMediaItemCollection!
     
     
     //Protocols
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("did load")
+        tutorial()
 
         //iOS 9
         let session = AVAudioSession.sharedInstance()
@@ -82,19 +82,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print("will appear")
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        print("did appear")
     }
     
     //iAd
@@ -106,17 +93,16 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
         
     }
 
-    @IBAction func tutorial(sender: AnyObject) {
+    //Tutorial
+    func tutorial() {
         
         
-        let tutorial = UIAlertController(title: "Help", message: "1. The musics will play in the order that you select;\n2. Adding more musics won't replace the ones in the queue;\n3. The music will pause if you remove the phone from the ear.", preferredStyle: UIAlertControllerStyle.Alert)
+        let tutorial = UIAlertController(title: "Help", message: "1. The musics will play in the order that you select;\n2. Adding more musics won't replace the ones in the queue;\n3. The music will pause if you remove the phone from the ear;\n4. You can create playlists in the button on the right corner of the screen.", preferredStyle: UIAlertControllerStyle.Alert)
 
         let ok = UIAlertAction(title: "Ok, got it!", style: UIAlertActionStyle.Cancel, handler: nil)
             tutorial.addAction(ok)
             
         self.presentViewController(tutorial, animated: true, completion: nil)
-
-
         
     }
     
@@ -133,9 +119,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
                 audioPlayer.pause()
                 
             }
-            
         }
-        
     }
     func didPlayToEnd(){
         
@@ -147,12 +131,10 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
             musicArtworkArray.removeAtIndex(0)
             artworkImageArray.removeAtIndex(0)
         }
-        
-        if musicTitleArray == []{
+        else if musicTitleArray == []{
             musicName.text = ""
         }
-        
-        if mediaArray == []{
+        else if mediaArray == []{
             
         }
         
@@ -174,22 +156,24 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
             musicTitleArray.append(thisItem.title!)
             
             //Road to display images (so long, so cruel)
-            var image: AnyObject!
-            if thisItem.artwork == nil{
-                image = UIImage(named: "noArtwork")
+            do{
+                var image: AnyObject!
+                if thisItem.artwork == nil{
+                    image = UIImage(named: "noArtwork")
+                }
+                else{
+                    image = thisItem.artwork
+                }
+                musicArtworkArray.append(image)
+                index = musicArtworkArray.count - 1
+                if musicArtworkArray[index] is UIImage{
+                    artworkImageArray.append(musicArtworkArray[index] as! UIImage)
+                }
+                else{
+                    artworkImageArray.append(musicArtworkArray[index].imageWithSize(CGSizeMake(143, 143))!)
+                }
+                musicArtwork.image = artworkImageArray[0]
             }
-            else{
-                image = thisItem.artwork
-            }
-            musicArtworkArray.append(image)
-            index = musicArtworkArray.count - 1
-            if musicArtworkArray[index] is UIImage{
-                artworkImageArray.append(musicArtworkArray[index] as! UIImage)
-            }
-            else{
-                artworkImageArray.append(musicArtworkArray[index].imageWithSize(CGSizeMake(143, 143))!)
-            }
-            musicArtwork.image = artworkImageArray[0]
             //End of it, congrats!
         }
         
@@ -370,7 +354,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     
     //Segues
     @IBAction func exit(sender: UIStoryboardSegue){
-        
         if sender.identifier == "fromCell"{
             mediaPicker(MPMediaPickerController(), didPickMediaItems: playlistItems)
         }

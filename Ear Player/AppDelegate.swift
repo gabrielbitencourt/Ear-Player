@@ -18,10 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        //let storyBoard = self.grabStoryboard()
-        //self.window?.rootViewController = storyBoard.instantiateInitialViewController() as UIViewController!
-        //self.window?.makeKeyAndVisible()
-        
         return true
     }
     
@@ -45,8 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController?.presentViewController(viewController, animated: true, completion: nil)
             viewController.addMusic(UIButton)
-
-            print("handled quick action")
             
             quickActionHandled = true
         }
