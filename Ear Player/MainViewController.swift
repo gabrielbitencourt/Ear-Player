@@ -9,14 +9,12 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
-import iAd
 
-class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBannerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, MPMediaPickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var musicArtwork: UIImageView!
     @IBOutlet weak var musicName: UILabel!
-    @IBOutlet weak var adBanner: ADBannerView!
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet var longTouch: UILongPressGestureRecognizer!
     
@@ -51,7 +49,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     //Protocols
     override func viewDidLoad() {
         super.viewDidLoad()
-        tutorial()
 
         //iOS 9
         let session = AVAudioSession.sharedInstance()
@@ -67,14 +64,10 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
         
         //Notification Center
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: Selector("sensorStateChanged"), name: "UIDeviceProximityStateDidChangeNotification", object: nil)
-        notificationCenter.addObserver(self, selector: Selector("didPlayToEnd"), name: "AVPlayerItemDidPlayToEndTimeNotification", object: nil)
+        notificationCenter.addObserver(self, selector: #selector(ViewController.sensorStateChanged), name: "UIDeviceProximityStateDidChangeNotification", object: nil)
+        notificationCenter.addObserver(self, selector: #selector(ViewController.didPlayToEnd), name: "AVPlayerItemDidPlayToEndTimeNotification", object: nil)
 
-        
-        //iAd code
-        adBanner.delegate = self
-        adBanner.hidden = true
-
+        //corner radius
         musicArtwork.layer.cornerRadius = 10.0
         musicArtwork.clipsToBounds = true
         
@@ -83,28 +76,10 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
         super.didReceiveMemoryWarning()
         
     }
+
+    //1. The musics will play in the order that you select; 2. Adding more musics won't replace the ones in the queue; 3. The music will pause if you remove the phone from the ear; 4. You can create playlists in the button on the right corner of the screen."
+        
     
-    //iAd
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        adBanner.hidden = false
-    }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        adBanner.hidden = true
-        
-    }
-
-    //Tutorial
-    func tutorial() {
-        
-        
-        let tutorial = UIAlertController(title: "Help", message: "1. The musics will play in the order that you select;\n2. Adding more musics won't replace the ones in the queue;\n3. The music will pause if you remove the phone from the ear;\n4. You can create playlists in the button on the right corner of the screen.", preferredStyle: UIAlertControllerStyle.Alert)
-
-        let ok = UIAlertAction(title: "Ok, got it!", style: UIAlertActionStyle.Cancel, handler: nil)
-            tutorial.addAction(ok)
-            
-        self.presentViewController(tutorial, animated: true, completion: nil)
-        
-    }
     
     //Music func's
     func sensorStateChanged(){
@@ -197,7 +172,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
     //Music shit
     @IBAction func playAudio(sender: AnyObject) {
         
-        counter++
+        counter += 1
         
         if counter % 2 == 0{
             playButton.setTitle("||", forState: .Normal)
@@ -310,7 +285,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, ADBanne
         cell.label.text = "\(indexPath.row + 2). " + musicTitleArray[indexPath.row + 1]
         cell.exitButton.hidden = touching
         cell.exitButton.layer.setValue(indexPath.row, forKey: "index")
-        cell.exitButton.addTarget(self, action: "deleteCell:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell.exitButton.addTarget(self, action: #selector(ViewController.deleteCell(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         return cell
     }
