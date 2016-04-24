@@ -16,6 +16,9 @@
 		9667DDAE1B2C7AFE005B3DA8 /* CellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */; };
 		9667DDB01B2C7D1D005B3DA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */; };
 		9678655C1BF25ECF0043BA37 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678655B1BF25ECF0043BA37 /* PlaylistController.swift */; };
+		9679BDE41CCC79C000CD9D5F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9679BDE31CCC79C000CD9D5F /* SWRevealViewController.m */; };
+		9679BDE71CCC7A0700CD9D5F /* aboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9679BDE51CCC7A0700CD9D5F /* aboutController.swift */; };
+		9679BDE81CCC7A0700CD9D5F /* menuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9679BDE61CCC7A0700CD9D5F /* menuController.swift */; };
 		96895EC71B2E264D0000B479 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96895EC01B2E264D0000B479 /* Main.storyboard */; };
 		96C2FE6F1B48AE92000088B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96C2FE6D1B48AE92000088B8 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
@@ -53,6 +56,11 @@
 		9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellController.swift; sourceTree = "<group>"; };
 		9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9678655B1BF25ECF0043BA37 /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
+		9679BDE11CCC79C000CD9D5F /* Ear Player-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ear Player-Bridging-Header.h"; sourceTree = "<group>"; };
+		9679BDE21CCC79C000CD9D5F /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		9679BDE31CCC79C000CD9D5F /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		9679BDE51CCC7A0700CD9D5F /* aboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutController.swift; sourceTree = "<group>"; };
+		9679BDE61CCC7A0700CD9D5F /* menuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuController.swift; sourceTree = "<group>"; };
 		96895EC11B2E264D0000B479 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96C2FE6E1B48AE92000088B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,10 +119,12 @@
 				9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */,
 				9678655B1BF25ECF0043BA37 /* PlaylistController.swift */,
 				9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */,
+				9679BDE51CCC7A0700CD9D5F /* aboutController.swift */,
+				9679BDE61CCC7A0700CD9D5F /* menuController.swift */,
 				96895EC01B2E264D0000B479 /* Main.storyboard */,
 				96C2FE6D1B48AE92000088B8 /* LaunchScreen.xib */,
 				962CB14F1B27BF9A00ECF55F /* Assets.xcassets */,
-				962CB1541B27BF9B00ECF55F /* Info.plist */,
+				968EC8941CCC7948007D7F71 /* Supporting files */,
 				964753B61BFCF7ED000D4420 /* Playlists.xcdatamodeld */,
 			);
 			path = "Ear Player";
@@ -136,6 +146,17 @@
 				962CB16A1B27BF9B00ECF55F /* Info.plist */,
 			);
 			path = "Ear PlayerUITests";
+			sourceTree = "<group>";
+		};
+		968EC8941CCC7948007D7F71 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				9679BDE11CCC79C000CD9D5F /* Ear Player-Bridging-Header.h */,
+				9679BDE21CCC79C000CD9D5F /* SWRevealViewController.h */,
+				9679BDE31CCC79C000CD9D5F /* SWRevealViewController.m */,
+				962CB1541B27BF9B00ECF55F /* Info.plist */,
+			);
+			name = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +221,7 @@
 		962CB13D1B27BF9A00ECF55F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Gabriel Bitencourt";
 				TargetAttributes = {
@@ -269,11 +291,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9679BDE81CCC7A0700CD9D5F /* menuController.swift in Sources */,
 				9667DDB01B2C7D1D005B3DA8 /* MainViewController.swift in Sources */,
 				9678655C1BF25ECF0043BA37 /* PlaylistController.swift in Sources */,
 				9667DDAE1B2C7AFE005B3DA8 /* CellController.swift in Sources */,
 				964753B81BFCF7ED000D4420 /* Playlists.xcdatamodeld in Sources */,
+				9679BDE71CCC7A0700CD9D5F /* aboutController.swift in Sources */,
 				962CB1491B27BF9A00ECF55F /* AppDelegate.swift in Sources */,
+				9679BDE41CCC79C000CD9D5F /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Ear Player/Info.plist";
@@ -421,6 +447,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bitencourt.Ear-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ear Player/Ear Player-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -428,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Ear Player/Info.plist";
@@ -436,6 +465,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bitencourt.Ear-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ear Player/Ear Player-Bridging-Header.h";
 			};
 			name = Release;
 		};

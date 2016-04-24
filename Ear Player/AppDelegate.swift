@@ -45,9 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             quickActionHandled = true
         }
         
-        if shortcutItem.localizedTitle == "Playlist: Favoritas"{
+        if shortcutItem.localizedTitle == "New Playlist"{
             
-            //will be implemented after playlists
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateInitialViewController()! as! PlaylistController
+            
+            self.window?.rootViewController?.presentViewController(viewController, animated: true, completion: nil)
+            viewController.newPlaylist(UIButton)
             
             quickActionHandled = true
         }

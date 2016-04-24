@@ -50,7 +50,7 @@
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypePlay</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Playlist: Favoritas</string>
+			<string>New Playlist</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER).favoritas</string>
 		</dict>

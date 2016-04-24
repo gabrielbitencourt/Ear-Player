@@ -14,7 +14,8 @@ import CoreData
 class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDelegate, MPMediaPickerControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var sidebarButton: UIBarButtonItem!
+
     //Plylists Set-up and Core Data
     var mediaPicker = MPMediaPickerController(mediaTypes: MPMediaType.AnyAudio)
     var playlistName = String()
@@ -24,6 +25,10 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //sidebar
+        sidebarButton.target = self.revealViewController()
+        sidebarButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -132,10 +137,10 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-        //Edit playlist action
+        /*Edit playlist action
         let editAction = UITableViewRowAction(style: .Normal, title: "Edit", handler: {action, indexPath -> Void in
             print("edit")
-        })
+        })*/
         
         //Delete playlist action
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete", handler: {action, indexPath -> Void in
@@ -156,7 +161,7 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
         })
         deleteAction.backgroundColor = UIColor.redColor()
         
-        return [deleteAction, editAction]
+        return [deleteAction]//, editAction]
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -182,9 +187,10 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
         
-        if segue.identifier == "fromCell"{
+        if segue.identifier == "playlist"{
             //Get the destination view and the sender
-            let dtvc = segue.destinationViewController as! ViewController
+            let nav = segue.destinationViewController as! UINavigationController
+            let dtvc = nav.topViewController as! ViewController
             let cell = sender as! UITableViewCell
             let index = tableView.indexPathForCell(cell)!
             
@@ -192,7 +198,9 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
             let playlist = playlists[index.row]
             let songsData = playlist.valueForKey("songs") as? NSData
             let songs = NSKeyedUnarchiver.unarchiveObjectWithData(songsData!) as! MPMediaItemCollection
+            
             dtvc.playlistItems = songs
+
         }
         else if segue.identifier == "fromButton"{
             

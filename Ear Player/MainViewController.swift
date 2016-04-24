@@ -4,6 +4,7 @@
 //
 //  Created by Gabriel Bitencourt on 10/06/15.
 //  Copyright © 2015 Gabriel Bitencourt. All rights reserved.
+//  TE AMO EAR PLAYER <3
 //
 
 import UIKit
@@ -16,10 +17,9 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     @IBOutlet weak var musicArtwork: UIImageView!
     @IBOutlet weak var musicName: UILabel!
     @IBOutlet weak var collection: UICollectionView!
-    @IBOutlet var longTouch: UILongPressGestureRecognizer!
+    @IBOutlet weak var sidebarButton: UIBarButtonItem!
     
-    
-    var counter: Int = 1 //To make soundEnabler work (odd: not enabled, even: enabled)
+    var counter: Int = 1 //(odd: pause, even: play)
     var counterDelete: Int = 0
     var deleted: Int = 0
     var touching: Bool = true
@@ -44,8 +44,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     
     //Core Data for Playlists
     var playlistItems: MPMediaItemCollection!
-    
-    
+
     //Protocols
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,20 +65,21 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: #selector(ViewController.sensorStateChanged), name: "UIDeviceProximityStateDidChangeNotification", object: nil)
         notificationCenter.addObserver(self, selector: #selector(ViewController.didPlayToEnd), name: "AVPlayerItemDidPlayToEndTimeNotification", object: nil)
-
-        //corner radius
-        musicArtwork.layer.cornerRadius = 10.0
-        musicArtwork.clipsToBounds = true
         
+        //Sidebar menu
+        sidebarButton.target = self.revealViewController()
+        sidebarButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+        //Playlists
+        if playlistItems != nil{
+            mediaPicker(MPMediaPickerController(), didPickMediaItems: playlistItems)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-
-    //1. The musics will play in the order that you select; 2. Adding more musics won't replace the ones in the queue; 3. The music will pause if you remove the phone from the ear; 4. You can create playlists in the button on the right corner of the screen."
-        
-    
     
     //Music func's
     func sensorStateChanged(){
@@ -116,20 +116,20 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         collection.reloadData()
     }
     func playingSystem(){
-        
+
         for thisItem in mediaItems as! [MPMediaItem] {
-            
+
             let itemUrl = thisItem.valueForProperty(MPMediaItemPropertyAssetURL) as? NSURL
             let playerItem = AVPlayerItem(URL: itemUrl!)
             var index: Int!
-            
+
             if firstTime == true{
                 mediaArray.append(playerItem)
             } else if firstTime == false {
                 addLaterArray.append(playerItem)
             }
             musicTitleArray.append(thisItem.title!)
-            
+
             //Road to display images (so long, so cruel)
             do{
                 var image: AnyObject!
@@ -151,7 +151,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
             }
             //End of it, congrats!
         }
-        
+
     }
     func updateMetadata(){
         
@@ -168,19 +168,19 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         }
         
     }
-    
-    //Music shit
     @IBAction func playAudio(sender: AnyObject) {
         
         counter += 1
         
         if counter % 2 == 0{
+            playButton.titleLabel?.font = UIFont(name: "Marker Felt", size: 55.0)
             playButton.setTitle("||", forState: .Normal)
             UIDevice.currentDevice().proximityMonitoringEnabled = true
 
             updateMetadata()
         }
         else if counter % 2 == 1 {
+            playButton.titleLabel?.font = UIFont(name: "Marker Felt", size: 72.0)
             playButton.setTitle(">", forState: .Normal)
             UIDevice.currentDevice().proximityMonitoringEnabled = false
 
@@ -213,8 +213,8 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         }
     }
     
-    //Collection View Shit
-    @IBAction func touched(sender: AnyObject) {
+    //Collection View
+    func touched(sender: AnyObject) {
         touching = false
         collection.reloadData()
     }
@@ -226,6 +226,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     
     //Player protocols
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+
         if mediaArray == []{
             firstTime = true
             
@@ -240,13 +241,12 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
             firstTime = false
         }
 
-        
         collection.reloadData()
         mediaItems = mediaItemCollection.items
-        
+
         playingSystem()
         updateMetadata()
-        
+
         if firstTime == true{
             audioPlayer = AVQueuePlayer(items: mediaArray)
 
@@ -269,18 +269,17 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     }
     
     
-    //Collection View
+    //Collection View Protocols
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell: CellController = collection.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CellController
         
         
         cell.imageView.image = UIImage(named: "noArtwork")
-        
         cell.imageView.image = artworkImageArray[indexPath.row + 1]
         
-        cell.imageView.layer.cornerRadius = 10.0
-        cell.imageView.clipsToBounds = true
+        let longTouch = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.touched(_:)))
+        cell.addGestureRecognizer(longTouch)
         
         cell.label.text = "\(indexPath.row + 2). " + musicTitleArray[indexPath.row + 1]
         cell.exitButton.hidden = touching
