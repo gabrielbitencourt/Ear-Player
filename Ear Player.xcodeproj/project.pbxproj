@@ -16,7 +16,6 @@
 		9667DDAE1B2C7AFE005B3DA8 /* CellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */; };
 		9667DDB01B2C7D1D005B3DA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */; };
 		9678655C1BF25ECF0043BA37 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678655B1BF25ECF0043BA37 /* PlaylistController.swift */; };
-		967F43701B30B13B00172475 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967F436F1B30B13B00172475 /* iAd.framework */; };
 		96895EC71B2E264D0000B479 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96895EC01B2E264D0000B479 /* Main.storyboard */; };
 		96C2FE6F1B48AE92000088B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96C2FE6D1B48AE92000088B8 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
@@ -54,7 +53,6 @@
 		9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellController.swift; sourceTree = "<group>"; };
 		9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9678655B1BF25ECF0043BA37 /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
-		967F436F1B30B13B00172475 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		96895EC11B2E264D0000B479 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96C2FE6E1B48AE92000088B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +63,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				964753781BFCF751000D4420 /* CoreData.framework in Frameworks */,
-				967F43701B30B13B00172475 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				964753771BFCF751000D4420 /* CoreData.framework */,
-				967F436F1B30B13B00172475 /* iAd.framework */,
 				962CB1471B27BF9A00ECF55F /* Ear Player */,
 				962CB15C1B27BF9B00ECF55F /* Ear PlayerTests */,
 				962CB1671B27BF9B00ECF55F /* Ear PlayerUITests */,
