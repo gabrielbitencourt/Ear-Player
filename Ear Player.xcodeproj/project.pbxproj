@@ -94,7 +94,6 @@
 		962CB13C1B27BF9A00ECF55F = {
 			isa = PBXGroup;
 			children = (
-				964753771BFCF751000D4420 /* CoreData.framework */,
 				962CB1471B27BF9A00ECF55F /* Ear Player */,
 				962CB15C1B27BF9B00ECF55F /* Ear PlayerTests */,
 				962CB1671B27BF9B00ECF55F /* Ear PlayerUITests */,
@@ -116,11 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				962CB1481B27BF9A00ECF55F /* AppDelegate.swift */,
-				9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */,
-				9678655B1BF25ECF0043BA37 /* PlaylistController.swift */,
 				9667DDAD1B2C7AFE005B3DA8 /* CellController.swift */,
-				9679BDE51CCC7A0700CD9D5F /* aboutController.swift */,
 				9679BDE61CCC7A0700CD9D5F /* menuController.swift */,
+				9679BDE91CCC7BB200CD9D5F /* views */,
 				96895EC01B2E264D0000B479 /* Main.storyboard */,
 				96C2FE6D1B48AE92000088B8 /* LaunchScreen.xib */,
 				962CB14F1B27BF9A00ECF55F /* Assets.xcassets */,
@@ -148,13 +145,24 @@
 			path = "Ear PlayerUITests";
 			sourceTree = "<group>";
 		};
+		9679BDE91CCC7BB200CD9D5F /* views */ = {
+			isa = PBXGroup;
+			children = (
+				9667DDAF1B2C7D1D005B3DA8 /* MainViewController.swift */,
+				9678655B1BF25ECF0043BA37 /* PlaylistController.swift */,
+				9679BDE51CCC7A0700CD9D5F /* aboutController.swift */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
 		968EC8941CCC7948007D7F71 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				964753771BFCF751000D4420 /* CoreData.framework */,
+				962CB1541B27BF9B00ECF55F /* Info.plist */,
 				9679BDE11CCC79C000CD9D5F /* Ear Player-Bridging-Header.h */,
 				9679BDE21CCC79C000CD9D5F /* SWRevealViewController.h */,
 				9679BDE31CCC79C000CD9D5F /* SWRevealViewController.m */,
-				962CB1541B27BF9B00ECF55F /* Info.plist */,
 			);
 			name = "Supporting files";
 			sourceTree = "<group>";

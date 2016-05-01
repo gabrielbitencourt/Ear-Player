@@ -25,9 +25,9 @@ class aboutController: UIViewController {
         image.clipsToBounds = true
         image.layer.cornerRadius = 75.0
         
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        //proximity
+        UIDevice.currentDevice().proximityMonitoringEnabled = false
+
         
     }
 }

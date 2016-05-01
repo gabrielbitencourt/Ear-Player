@@ -29,11 +29,12 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
         sidebarButton.target = self.revealViewController()
         sidebarButton.action = #selector(SWRevealViewController.revealToggle(_:))
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+
+        //proximity
+        UIDevice.currentDevice().proximityMonitoringEnabled = false
+
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -91,9 +92,8 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(mediaItemCollection)
         let name = playlistName
-        /*let date = NSDate*/
         
-        saveName(name, songs: data)/*, date: date)*/
+        saveName(name, songs: data)
         tableView.reloadData()
 
     }
@@ -119,12 +119,10 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
         let mediaCollection = NSKeyedUnarchiver.unarchiveObjectWithData(collectionData) as! MPMediaItemCollection
         let count = mediaCollection.items.count
         
-        /*let date = NSDate()*/
-        
         //Set the cell
         cell.textLabel?.text = name
-        cell.detailTextLabel?.text = "\(count) musicas, tocado \(Int(playCount!)) vezes"// - criado em \(date)"
-
+        cell.detailTextLabel?.text = "\(count) musicas, tocado \(Int(playCount!)) vezes"
+        
         return cell
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -136,11 +134,6 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
         return true
     }
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        
-        /*Edit playlist action
-        let editAction = UITableViewRowAction(style: .Normal, title: "Edit", handler: {action, indexPath -> Void in
-            print("edit")
-        })*/
         
         //Delete playlist action
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete", handler: {action, indexPath -> Void in
@@ -161,7 +154,7 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
         })
         deleteAction.backgroundColor = UIColor.redColor()
         
-        return [deleteAction]//, editAction]
+        return [deleteAction]
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -208,7 +201,8 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     //Core Data
-    func saveName(name: String, songs: NSData){/*, date: NSDate, playCount: Double){*/
+    func saveName(name: String, songs: NSData){
+        
         //Get the delegate and context
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context = appDelegate.managedObjectContext
@@ -221,7 +215,6 @@ class PlaylistController: UIViewController, UITableViewDataSource, UITableViewDe
         playlist.setValue(name, forKey: "name")
         playlist.setValue(songs, forKey: "songs")
         playlist.setValue(0, forKey: "playCount")
-        //playlist.setValue(date, forKey: "date")
         
         //Save them
         do{

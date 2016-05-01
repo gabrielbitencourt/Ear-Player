@@ -38,13 +38,16 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     var artworkImageArray: [UIImage] = []
     var toBeSkipped: [Int] = []
     
-    //Add second time
-    var newMedias: [AVPlayerItem] = []
-    var newPlayer: AVQueuePlayer!
-    
     //Core Data for Playlists
     var playlistItems: MPMediaItemCollection!
-
+    
+    //Notification Center
+    let notificationCenter = NSNotificationCenter.defaultCenter()
+    
+    //Slider
+    @IBOutlet weak var slider: UISlider!
+    let myContext = UnsafeMutablePointer<()>()
+    
     //Protocols
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,10 +79,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
             mediaPicker(MPMediaPickerController(), didPickMediaItems: playlistItems)
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
     
     //Music func's
     func sensorStateChanged(){
@@ -100,7 +99,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         
         mediaArray.removeAtIndex(0)
         musicTitleArray.removeAtIndex(0)
-        
+
         
         if artworkImageArray != []{
             musicArtworkArray.removeAtIndex(0)
@@ -158,7 +157,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         if musicTitleArray != []{
             musicName.text = musicTitleArray[0]
         } else {
-            musicName.text = ""
+            musicName.text = "Choose a music"
         }
         if artworkImageArray != []{
             musicArtwork.image = artworkImageArray[0]
@@ -166,21 +165,22 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         } else {
             musicArtwork.image = UIImage(named: "noArtwork")
         }
+
         
     }
+    
     @IBAction func playAudio(sender: AnyObject) {
         
         counter += 1
         
         if counter % 2 == 0{
-            playButton.titleLabel?.font = UIFont(name: "Marker Felt", size: 55.0)
             playButton.setTitle("||", forState: .Normal)
             UIDevice.currentDevice().proximityMonitoringEnabled = true
-
+            notificationCenter.addObserver(self.audioPlayer, forKeyPath: "currentItem.duration", options: NSKeyValueObservingOptions.Initial, context: nil)
             updateMetadata()
+
         }
         else if counter % 2 == 1 {
-            playButton.titleLabel?.font = UIFont(name: "Marker Felt", size: 72.0)
             playButton.setTitle(">", forState: .Normal)
             UIDevice.currentDevice().proximityMonitoringEnabled = false
 
@@ -211,6 +211,8 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         if mediaArray.count >= 1{
             audioPlayer.currentItem?.seekToTime(CMTimeMakeWithSeconds(0, 1))
         }
+    }
+    @IBAction func changeTime(sender: AnyObject) {
     }
     
     //Collection View
@@ -274,8 +276,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         
         let cell: CellController = collection.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CellController
         
-        
-        cell.imageView.image = UIImage(named: "noArtwork")
         cell.imageView.image = artworkImageArray[indexPath.row + 1]
         
         let longTouch = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.touched(_:)))
@@ -325,11 +325,22 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         collection.reloadData()
         touching = true
     }
-    
-    //Segues
-    @IBAction func exit(sender: UIStoryboardSegue){
-        if sender.identifier == "fromCell"{
-            mediaPicker(MPMediaPickerController(), didPickMediaItems: playlistItems)
+    /*
+    override func didChangeValueForKey(key: String) {
+        super.didChangeValueForKey(key)
+        
+        if key == "currentItem.duration"{
+            print(audioPlayer.currentItem?.duration)
         }
     }
+    */
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if keyPath == "currentItem.duration"{
+            print(audioPlayer.currentItem?.duration)
+        }
+        //super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+
+    }
+    
 }
