@@ -46,7 +46,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     
     //Slider
     @IBOutlet weak var slider: UISlider!
-    let myContext = UnsafeMutablePointer<()>()
     
     //Protocols
     override func viewDidLoad() {
@@ -176,7 +175,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         if counter % 2 == 0{
             playButton.setTitle("||", forState: .Normal)
             UIDevice.currentDevice().proximityMonitoringEnabled = true
-            notificationCenter.addObserver(self.audioPlayer, forKeyPath: "currentItem.duration", options: NSKeyValueObservingOptions.Initial, context: nil)
+            //notificationCenter.addObserver(self.audioPlayer, forKeyPath: "currentItem.duration", options: NSKeyValueObservingOptions.Initial, context: nil)
             updateMetadata()
 
         }
@@ -333,7 +332,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
             print(audioPlayer.currentItem?.duration)
         }
     }
-    */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if keyPath == "currentItem.duration"{
@@ -342,5 +340,5 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         //super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
 
     }
-    
+    */
 }
