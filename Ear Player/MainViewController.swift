@@ -27,7 +27,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     var addLaterArray: [AVPlayerItem] = []
     
     //Audio variables
-    var mediaPicker = MPMediaPickerController(mediaTypes: MPMediaType.AnyAudio)
+    var mediaPicker = MPMediaPickerController(mediaTypes: MPMediaType.anyAudio)
     var audioPlayer: AVQueuePlayer!
     var mediaItems: AnyObject!
     
@@ -42,7 +42,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     var playlistItems: MPMediaItemCollection!
     
     //Notification Center
-    let notificationCenter = NSNotificationCenter.defaultCenter()
+    let notificationCenter = NotificationCenter.default
     
     //Slider
     @IBOutlet weak var slider: UISlider!
@@ -55,18 +55,18 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         let session = AVAudioSession.sharedInstance()
         do{
             try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try! session.overrideOutputAudioPort(AVAudioSessionPortOverride.None)
+            try! session.overrideOutputAudioPort(AVAudioSessionPortOverride.none)
             try! session.setActive(true)
         }
         
         
         //Proximity code
-        UIDevice.currentDevice().proximityMonitoringEnabled = false
+        UIDevice.current.isProximityMonitoringEnabled = false
         
         //Notification Center
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: #selector(ViewController.sensorStateChanged), name: "UIDeviceProximityStateDidChangeNotification", object: nil)
-        notificationCenter.addObserver(self, selector: #selector(ViewController.didPlayToEnd), name: "AVPlayerItemDidPlayToEndTimeNotification", object: nil)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(ViewController.sensorStateChanged), name: NSNotification.Name(rawValue: "UIDeviceProximityStateDidChangeNotification"), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(ViewController.didPlayToEnd), name: NSNotification.Name(rawValue: "AVPlayerItemDidPlayToEndTimeNotification"), object: nil)
         
         //Sidebar menu
         sidebarButton.target = self.revealViewController()
@@ -84,7 +84,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         
         if mediaArray != []{
             
-            if UIDevice.currentDevice().proximityState && counter % 2 == 0{
+            if UIDevice.current.proximityState && counter % 2 == 0{
                 audioPlayer.play()
             }
             else {
@@ -96,13 +96,13 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     }
     func didPlayToEnd(){
         
-        mediaArray.removeAtIndex(0)
-        musicTitleArray.removeAtIndex(0)
+        mediaArray.remove(at: 0)
+        musicTitleArray.remove(at: 0)
 
         
         if artworkImageArray != []{
-            musicArtworkArray.removeAtIndex(0)
-            artworkImageArray.removeAtIndex(0)
+            musicArtworkArray.remove(at: 0)
+            artworkImageArray.remove(at: 0)
         }
         else if musicTitleArray == []{
             musicName.text = ""
@@ -117,8 +117,8 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
 
         for thisItem in mediaItems as! [MPMediaItem] {
 
-            let itemUrl = thisItem.valueForProperty(MPMediaItemPropertyAssetURL) as? NSURL
-            let playerItem = AVPlayerItem(URL: itemUrl!)
+            let itemUrl = thisItem.value(forProperty: MPMediaItemPropertyAssetURL) as? URL
+            let playerItem = AVPlayerItem(url: itemUrl!)
             var index: Int!
 
             if firstTime == true{
@@ -128,7 +128,6 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
             }
             musicTitleArray.append(thisItem.title!)
 
-            //Road to display images (so long, so cruel)
             do{
                 var image: AnyObject!
                 if thisItem.artwork == nil{
@@ -143,7 +142,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
                     artworkImageArray.append(musicArtworkArray[index] as! UIImage)
                 }
                 else{
-                    artworkImageArray.append(musicArtworkArray[index].imageWithSize(CGSizeMake(143, 143))!)
+                    artworkImageArray.append(musicArtworkArray[index].image(at: CGSize(width: 143, height: 143))!)
                 }
                 musicArtwork.image = artworkImageArray[0]
             }
@@ -168,34 +167,34 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         
     }
     
-    @IBAction func playAudio(sender: AnyObject) {
+    @IBAction func playAudio(_ sender: AnyObject) {
         
         counter += 1
         
         if counter % 2 == 0{
-            playButton.setTitle("||", forState: .Normal)
-            UIDevice.currentDevice().proximityMonitoringEnabled = true
+            playButton.setTitle("||", for: UIControlState())
+            UIDevice.current.isProximityMonitoringEnabled = true
             //notificationCenter.addObserver(self.audioPlayer, forKeyPath: "currentItem.duration", options: NSKeyValueObservingOptions.Initial, context: nil)
             updateMetadata()
 
         }
         else if counter % 2 == 1 {
-            playButton.setTitle(">", forState: .Normal)
-            UIDevice.currentDevice().proximityMonitoringEnabled = false
+            playButton.setTitle(">", for: UIControlState())
+            UIDevice.current.isProximityMonitoringEnabled = false
 
             updateMetadata()
         }
         
         
     }
-    @IBAction func addMusic(sender: AnyObject) {
+    @IBAction func addMusic(_ sender: AnyObject) {
         
         self.mediaPicker.delegate = self
         self.mediaPicker.allowsPickingMultipleItems = true
-        self.presentViewController(self.mediaPicker, animated: true, completion: nil)
+        self.present(self.mediaPicker, animated: true, completion: nil)
         
     }
-    @IBAction func advance(sender: AnyObject) {
+    @IBAction func advance(_ sender: AnyObject) {
         if mediaArray.count >= 2 {
             audioPlayer.advanceToNextItem()
             didPlayToEnd()
@@ -206,27 +205,27 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
             updateMetadata()
         }
     }
-    @IBAction func getback(sender: AnyObject) {
+    @IBAction func getback(_ sender: AnyObject) {
         if mediaArray.count >= 1{
-            audioPlayer.currentItem?.seekToTime(CMTimeMakeWithSeconds(0, 1))
+            audioPlayer.currentItem?.seek(to: CMTimeMakeWithSeconds(0, 1))
         }
     }
-    @IBAction func changeTime(sender: AnyObject) {
+    @IBAction func changeTime(_ sender: AnyObject) {
     }
     
     //Collection View
-    func touched(sender: AnyObject) {
+    func touched(_ sender: AnyObject) {
         touching = false
         collection.reloadData()
     }
-    @IBAction func tapped(sender: AnyObject) {
+    @IBAction func tapped(_ sender: AnyObject) {
         touching = true
         collection.reloadData()
     }
 
     
     //Player protocols
-    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
 
         if mediaArray == []{
             firstTime = true
@@ -243,7 +242,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         }
 
         collection.reloadData()
-        mediaItems = mediaItemCollection.items
+        mediaItems = mediaItemCollection.items as AnyObject!
 
         playingSystem()
         updateMetadata()
@@ -253,27 +252,27 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
 
         } else if firstTime == false {
             for item in addLaterArray {
-                audioPlayer.insertItem(item, afterItem: mediaArray[mediaArray.count - 1])
+                audioPlayer.insert(item, after: mediaArray[mediaArray.count - 1])
                 mediaArray.append(item)
-                addLaterArray.removeAtIndex(0)
+                addLaterArray.remove(at: 0)
             }
         }
         
         collection.reloadData()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         
-        dismissViewControllerAnimated(false, completion: nil)
+        dismiss(animated: false, completion: nil)
         
     }
     
     
     //Collection View Protocols
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: CellController = collection.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CellController
+        let cell: CellController = collection.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CellController
         
         cell.imageView.image = artworkImageArray[indexPath.row + 1]
         
@@ -281,13 +280,13 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
         cell.addGestureRecognizer(longTouch)
         
         cell.label.text = "\(indexPath.row + 2). " + musicTitleArray[indexPath.row + 1]
-        cell.exitButton.hidden = touching
+        cell.exitButton.isHidden = touching
         cell.exitButton.layer.setValue(indexPath.row, forKey: "index")
-        cell.exitButton.addTarget(self, action: #selector(ViewController.deleteCell(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.exitButton.addTarget(self, action: #selector(ViewController.deleteCell(_:)), for: UIControlEvents.touchUpInside)
         
         return cell
     }
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if mediaArray.count == 0{
             return 0
@@ -299,20 +298,20 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
 
     }
     
-    func deleteCell(sender: AnyObject){
+    func deleteCell(_ sender: AnyObject){
         var item = Int()
         
-        item = sender.layer.valueForKey("index") as! Int + 1
+        item = sender.layer.value(forKey: "index") as! Int + 1
 
         
-        audioPlayer.removeItem(mediaArray[item])
+        audioPlayer.remove(mediaArray[item])
 
-        musicTitleArray.removeAtIndex(item)
-        mediaArray.removeAtIndex(item)
+        musicTitleArray.remove(at: item)
+        mediaArray.remove(at: item)
         
         if artworkImageArray != []{
-            musicArtworkArray.removeAtIndex(item)
-            artworkImageArray.removeAtIndex(item)
+            musicArtworkArray.remove(at: item)
+            artworkImageArray.remove(at: item)
         }
         
         if musicTitleArray == []{

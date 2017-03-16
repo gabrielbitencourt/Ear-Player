@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 //Music Player Queue Cell
 class CellController: UICollectionViewCell {
@@ -14,13 +15,5 @@ class CellController: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var exitButton: UIButton!
-    
-}
-
-//Podcasts Search Cell
-class PCellController: UICollectionViewCell{
-    
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var label: UILabel!
     
 }

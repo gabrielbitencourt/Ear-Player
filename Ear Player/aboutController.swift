@@ -26,7 +26,7 @@ class aboutController: UIViewController {
         image.layer.cornerRadius = 75.0
         
         //proximity
-        UIDevice.currentDevice().proximityMonitoringEnabled = false
+        UIDevice.current.isProximityMonitoringEnabled = false
 
         
     }
