@@ -4,7 +4,7 @@
 //
 //  Created by Gabriel Bitencourt on 10/06/15.
 //  Copyright © 2015 Gabriel Bitencourt. All rights reserved.
-//  TE AMO EAR PLAYER <3
+//
 //
 
 import UIKit
@@ -80,7 +80,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     }
     
     //Music func's
-    func sensorStateChanged(){
+    @objc func sensorStateChanged(){
         
         if mediaArray != []{
             
@@ -94,7 +94,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
             }
         }
     }
-    func didPlayToEnd(){
+    @objc func didPlayToEnd(){
         
         mediaArray.remove(at: 0)
         musicTitleArray.remove(at: 0)
@@ -214,7 +214,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
     }
     
     //Collection View
-    func touched(_ sender: AnyObject) {
+    @objc func touched(_ sender: AnyObject) {
         touching = false
         collection.reloadData()
     }
@@ -298,7 +298,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate, UIColle
 
     }
     
-    func deleteCell(_ sender: AnyObject){
+    @objc func deleteCell(_ sender: AnyObject){
         var item = Int()
         
         item = sender.layer.value(forKey: "index") as! Int + 1
